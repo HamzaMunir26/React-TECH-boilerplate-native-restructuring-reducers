@@ -7,6 +7,7 @@ import styles from './styles';
 import {connect} from 'react-redux';
 import {login} from '../../Stores/Actions/login';
 import {Images} from '../../Utils';
+import { NavigateToBase } from "../../Utils";
 
 const Login = (props) => {
   const [email, setEmail] = useState('');
@@ -19,13 +20,10 @@ const Login = (props) => {
     errorFunc('');
   };
 
-  const onSubmit = async (navigation) => {
-    navigation.navigate('Deliveries');
+  const onSubmit = () => {
+    NavigateToBase(this.props.navigation, "Deliveries");
   };
 
-  const forgotPassword = () => {
-    alert('Not implemented Yet');
-  };
 
   const usernameIcon=<Image source={Images.username} />
   const passwordIcon=<Image source={Images.password} />
@@ -63,19 +61,10 @@ const Login = (props) => {
             )}  
           <AppButton
             loading={props.loading}
-            onPress={() =>  onSubmit()}
+            onPress={() => onSubmit}
             buttonMainContainerStyles={styles.loginButtonStyles}
             label={'Sign In'}
           />
-        <View style={styles.signUpTextContainer}>
-          <Text style={styles.textStyle}>Do you have an account?</Text>
-          <TouchableOpacity>
-            <Text style={styles.signUpText}>Sign Up</Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity onPress={() => forgotPassword()}>
-          <Text style={styles.textStyle}>Forgot Password?</Text>
-        </TouchableOpacity>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
