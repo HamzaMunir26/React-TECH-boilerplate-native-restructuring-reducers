@@ -21,7 +21,8 @@ const Login = (props) => {
   };
 
   const onSubmit = () => {
-    NavigateToBase(this.props.navigation, "Deliveries");
+     NavigateToBase(this.props.navigation, "Deliveries");
+     this.props.navigation.navigate("Deliveries")
   };
 
 

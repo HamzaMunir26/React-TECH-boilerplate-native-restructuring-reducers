@@ -11,13 +11,14 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
 
+
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const DrawerStack = () => {
     return (
       <Drawer.Navigator>
-        <Drawer.Screen name="My Deliveries" component={Deliveries} options={{title: 'My Deliveries',}}/>
+        <Drawer.Screen name="My Deliveries" component={Deliveries} options={{title: 'My Deliveries'}}/>
         <Drawer.Screen name="Stats" component={Stats} options={{title: 'Stats',}}/>
         <Drawer.Screen name="Settings" component={Settings} options={{title: 'Settings',}}/>
         <Drawer.Screen name="Help" component={Help} options={{title: 'Help',}}/>

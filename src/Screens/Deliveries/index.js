@@ -1,92 +1,52 @@
 import React from 'react';
-import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
-import { View, FlatList } from "react-native";
-import { connect } from "react-redux";
-import { getProducts } from "./actions";
-import styles from "./styles";
-import { Header, ProductItemCard, HeaderImage } from "../../components";
-import { DrawerActions } from "react-navigation";
-import { Images, Metrics, Adjust } from "../../utils";
+import { View, Text, FlatList } from "react-native";
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import images from '../../Utils/Images';
 
 const Tab = createMaterialTopTabNavigator();
 
-const img = [Images.slider1, Images.slider2, Images.slider3];
-console.log(this.props.products);
+const newOrderScreen = () => {
+  
+  const LeftContent = props => <Avatar.Icon {...props} icon={images.acceptedorders} />
 
-const NeworderScreen = () => {
   return (
-    <View>
-        <HeaderImage>
-          <View style={styles.container}>
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              keyExtractor={(item, index) => index.toString()}
-              style={styles.itemContainer}
-              data={
-                this.props.products.length > 0 &&
-                this.props.products[0].sort((a, b) => a.position - b.position)
-              }
-              renderItem={({ item }) => (
-                <ProductItemCard
-                  onClick={() =>
-                    this.props.navigation.navigate("ProductDetail", {
-                      itemId: item.id,
-                      subItem: item,
-                      image: item.images.large,
-                    })
-                  }
-                  image={item.images.medium}
-                  label={item.name}
-                  price={item.price.delivery}
-                />
-              )}
-            />
-          </View>
-        </HeaderImage>
-      </View>
+      <Card>
+        <Card.Title title="New Orders" subtitle="Details" left={LeftContent} />
+        <Card.Content>
+          <Title>Order Title</Title>
+          <Paragraph>Sample Content</Paragraph>
+        </Card.Content>
+        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
+        <Card.Actions >
+          <Button icon={images.acceptedorders} mode="outlined" onPress={() => {alert('Order Confirmed')}}>Confirm </Button>
+          <Button icon={images.rejectedorders} mode="outlined" onPress={() => {alert('Order Rejected')}}>Reject </Button>
+        </Card.Actions>
+      </Card>
     );
 }
 
-const OngoingScreen = () => {
+const onGoingScreen = () => {
+  
+  const LeftContent = props => <Avatar.Icon {...props} icon={images.pendingorders} />
+
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <View>
-        <HeaderImage>
-          <View style={styles.container}>
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              keyExtractor={(item, index) => index.toString()}
-              style={styles.itemContainer}
-              data={
-                this.props.products.length > 0 &&
-                this.props.products[0].sort((a, b) => a.position - b.position)
-              }
-              renderItem={({ item }) => (
-                <ProductItemCard
-                  onClick={() =>
-                    this.props.navigation.navigate("ProductDetail", {
-                      itemId: item.id,
-                      subItem: item,
-                      image: item.images.large,
-                    })
-                  }
-                  image={item.images.medium}
-                  label={item.name}
-                  price={item.price.delivery}
-                />
-              )}
-            />
-          </View>
-        </HeaderImage>
-      </View>
-    </View>
+    <Card>
+    <Card.Title title="Ongoing Orders" subtitle="Details" left={LeftContent} />
+    <Card.Content>
+      <Title>Order Title</Title>
+      <Paragraph>Sample Content</Paragraph>
+    </Card.Content>
+    <Card.Cover source={{ uri: 'https://picsum.photos/720' }} />
+    <Card.Actions style={{ justifyContent: 'center', alignItems: 'center' }}>
+      <Button icon={images.gps} mode="contained">Get Direction </Button>
+    </Card.Actions>
+  </Card>
   );
 }
 
-const DeliveredScreen = () => {
+const deliveredScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Delivered!</Text>
@@ -106,17 +66,17 @@ const Deliveries = () => {
     >
       <Tab.Screen
         name="New Order"
-        component={NeworderScreen}
+        component={newOrderScreen}
         options={{ tabBarLabel: 'New Order' }}
       />
       <Tab.Screen
         name="Ongoing"
-        component={OngoingScreen}
+        component={onGoingScreen}
         options={{ tabBarLabel: 'Ongoing' }}
       />
       <Tab.Screen
         name="Delivered"
-        component={DeliveredScreen}
+        component={deliveredScreen}
         options={{ tabBarLabel: 'Delivered' }}
       />
     </Tab.Navigator>
@@ -124,18 +84,11 @@ const Deliveries = () => {
 }
 
 const mapStateToProps = (state) => {
-  const { products } = state.categoryState;
-  const { Categories } = state.homeState;
   return {
-    products,
-    Categories,
   };
 };
 const mapDispatchToProps = (dispatch) => ({
-  dispatch,
-  getProducts: (category_id, Categories) => {
-    dispatch(getProducts(category_id, Categories));
-  },
+  dispatch
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Deliveries);

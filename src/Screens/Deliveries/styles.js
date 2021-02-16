@@ -4,10 +4,18 @@ import {Colors, Fonts, Metrics} from '../../Utils';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.appBackgroundColor,
     justifyContent: 'center',
     alignItems: 'center',
     display: 'flex',
+    backgroundColor: Colors.appBackgroundColor,
+    ...Metrics.containerTopMargin,
+    marginTop: 0,
+    paddingTop: 150,
+    borderTopRightRadius: 25,
+    borderTopLeftRadius: 25,
+    height: "100%",
+    overflow: "hidden",
+    flexGrow: 1,
   },
   innerContainer: {
     justifyContent: 'center',
@@ -17,6 +25,8 @@ export default StyleSheet.create({
     // borderWidth: 1,
     borderColor: Colors.appColor,
     borderRadius: 5,
+    flexGrow: 1,
+    marginTop: 10,
   },
   buttonStyles: {
     marginVertical: Metrics.baseMargin,
@@ -24,5 +34,9 @@ export default StyleSheet.create({
   },
   buttonWidth: {
     width: Metrics.screenWidth - 50,
+  },
+
+  sliderContainer: {
+    height: 150,
   },
 });
